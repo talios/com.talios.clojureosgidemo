@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.talios</groupId>
+    <artifactId>com.talios.clojureosgidemo</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+  </parent>
+
+  <groupId>com.talios</groupId>
+  <artifactId>com.talios.clojureosgidemo.dist</artifactId>
+  <version>1.0.1-SNAPSHOT</version>
+  <packaging>karaf-assembly</packaging>
+
+  <name>Karaf Clojure OSGi :: Demo Distribution</name>
+
+  <dependencies>
+    <!-- scope is compile so all features (there is only one) are installed into startup.properties and the feature repo itself is not installed -->
+    <dependency>
+      <groupId>org.apache.karaf.features</groupId>
+      <artifactId>framework</artifactId>
+      <version>${karaf.version}</version>
+      <type>kar</type>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- scope is runtime so the feature repo is listed in the features service config file, and features may be installed using the karaf-maven-plugin configuration -->
+    <dependency>
+      <groupId>org.apache.karaf.features</groupId>
+      <artifactId>standard</artifactId>
+      <version>${karaf.version}</version>
+      <type>xml</type>
+      <classifier>features</classifier>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.talios</groupId>
+      <artifactId>com.talios.clojureosgidemo.feature</artifactId>
+      <version>1.0.1-SNAPSHOT</version>
+      <type>kar</type>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <filtering>true</filtering>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.karaf.tooling</groupId>
+        <artifactId>karaf-maven-plugin</artifactId>
+        <version>${karaf.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <archiveZip>true</archiveZip>
+          <archiveTarGz>false</archiveTarGz>
+          <javase>1.8</javase>
+          <!-- no startupFeatures -->
+          <bootFeatures>
+            <feature>webconsole</feature>
+            <feature>management</feature>
+            <feature>kar</feature>
+            <feature>shell</feature>
+            <feature>scr</feature>
+            <feature>ssh</feature>
+            <feature>system</feature>
+            <feature>standard</feature>
+            <feature>pax-jetty</feature>
+            <feature>pax-http-jetty</feature>
+            <feature>pax-http</feature>
+          </bootFeatures>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

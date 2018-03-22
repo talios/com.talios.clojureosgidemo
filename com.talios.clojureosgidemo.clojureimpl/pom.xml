@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.talios</groupId>
+    <artifactId>com.talios.clojureosgidemo</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+  </parent>
+
+  <groupId>com.talios</groupId>
+  <artifactId>com.talios.clojureosgidemo.clojureimpl</artifactId>
+  <version>1.0.1-SNAPSHOT</version>
+  <packaging>bundle</packaging>
+
+  <name>Karaf Clojure OSGi :: ClojureOSGi Based Service</name>
+  <url>http://maven.apache.org</url>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>[1.7.25]</version>
+    </dependency>
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>tools.logging</artifactId>
+      <version>0.5.0-alpha</version>
+    </dependency>
+    <dependency>
+      <groupId>com.theoryinpractise</groupId>
+      <artifactId>clojure.osgi</artifactId>
+      <version>[1.9.0-2]</version>
+    </dependency>
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>tools.nrepl</artifactId>
+      <version>0.2.13</version>
+    </dependency>
+    <dependency>
+      <groupId>com.talios</groupId>
+      <artifactId>com.talios.clojureosgidemo.api</artifactId>
+      <version>1.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/clojure</directory>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>com.theoryinpractise</groupId>
+        <artifactId>clojure-maven-plugin</artifactId>
+        <version>1.8.1</version>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>test-compile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <temporaryOutputDirectory>true</temporaryOutputDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>3.0.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <obrRepository>NONE</obrRepository>
+          <instructions>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+            <Clojure-Require>com.talios.clojureosgidemo.clojureimpl</Clojure-Require>
+            <Clojure-ActivatorNamespace>com.talios.clojureosgidemo.clojureimpl</Clojure-ActivatorNamespace>
+            <Embed-Dependency>tools.logging</Embed-Dependency>
+            <Embed-Transitive>true</Embed-Transitive>
+            <Import-Package>!sun.misc, clojure.*, *</Import-Package>
+            <Export-Package></Export-Package>
+            <Provide-Capability>osgi.service;objectClass:List&lt;String&gt;="com.talios.clojureosgidemo.api.EchoService"</Provide-Capability>
+            <DynamicImport-Package>*</DynamicImport-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

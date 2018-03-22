@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.talios</groupId>
+  <artifactId>com.talios.clojureosgidemo</artifactId>
+  <version>1.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Karaf Clojure OSGi :: Demo</name>
+
+  <modules>
+    <module>com.talios.clojureosgidemo.api</module>
+    <module>com.talios.clojureosgidemo.clojureimpl</module>
+    <module>com.talios.clojureosgidemo.javaclient</module>
+    <module>com.talios.clojureosgidemo.feature</module>
+    <module>com.talios.clojureosgidemo.dist</module>
+  </modules>
+
+  <properties>
+    <karaf.version>4.0.10</karaf.version>
+  </properties>
+</project>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.talios</groupId>
+    <artifactId>com.talios.clojureosgidemo</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+  </parent>
+
+  <groupId>com.talios</groupId>
+  <artifactId>com.talios.clojureosgidemo.feature</artifactId>
+  <version>1.0.1-SNAPSHOT</version>
+  <packaging>kar</packaging>
+
+  <name>Karaf Clojure OSGi :: Demo Feature</name>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.karaf.tooling</groupId>
+        <artifactId>karaf-maven-plugin</artifactId>
+        <version>${karaf.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <includeTransitiveDependency>false</includeTransitiveDependency>
+          <startLevel>80</startLevel>
+          <aggregateFeatures>true</aggregateFeatures>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

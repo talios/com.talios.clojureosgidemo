@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features
+  xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" name="com.talios.clojureosgidemo.feature">
+  <feature name="com.talios.clojureosgidemo.feature" description="Clojure OSGi Demo Feature" version="${project.version}">
+    <feature>webconsole</feature>
+    <bundle>mvn:com.theoryinpractise/clojure.osgi/1.9.0-2</bundle>
+    <bundle>mvn:com.talios/com.talios.clojureosgidemo.api/${project.version}</bundle>
+    <bundle>mvn:com.talios/com.talios.clojureosgidemo.clojureimpl/${project.version}</bundle>
+    <bundle>mvn:com.talios/com.talios.clojureosgidemo.javaclient/${project.version}</bundle>
+  </feature>
+</features>

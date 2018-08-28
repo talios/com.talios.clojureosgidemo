@@ -18,6 +18,6 @@
   </modules>
 
   <properties>
-    <karaf.version>4.0.10</karaf.version>
+    <karaf.version>4.2.1</karaf.version>
   </properties>
 </project>
